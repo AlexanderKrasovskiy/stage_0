@@ -11,9 +11,11 @@
 }
 
 :root {
-  --color-dark: #000000;
+  --color-black: #000000;
   --color-gold: #bdae82;
   --color-white: #ffffff;
+  --font-large: 60px;
+  --font-medium: 40px;
 }
 
 * {
@@ -21,13 +23,23 @@
   margin: 0;
   padding: 0;
 
+
+
   outline: 1px solid orangered;
-  min-height: 20px;
+}
+
+html {
+  scroll-behavior: smooth; 
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
   font-family: 'Inter', sans-serif;
-  /* font-family: 'Merriweather', serif; */
+  color: var(--color-white);
+  background-color: var(--color-black);
 }
 
 .container {
@@ -35,4 +47,133 @@ body {
   width: 1440px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+/* @media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+} */
+
+.header-container {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: url("../assets/img/header-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center 0;
+}
+
+.header-logo {
+  width: 50px;
+  height: 50px;
+  background-image: url("../assets/svg/header-logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 0.3s;
+}
+
+.header-logo:hover {
+  filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%)
+    contrast(87%);
+}
+
+.nav {
+  margin-left: auto;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0 15px;
+}
+
+.nav-item {
+}
+
+.nav-link {
+  padding: 0 15px;
+  font-size: 20px;
+  line-height: 50px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: var(--color-white);
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--color-gold);
+}
+
+.language-switch {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 50px;
+  letter-spacing: 1px;
+}
+
+.lang:hover {
+  cursor: pointer;
+}
+
+.lang-selected {
+  color: var(--color-gold);
+}
+
+.hero-container {
+  height: 820px;
+  padding-top: 160px;
+  padding-left: 80px;
+  background-image: url("../assets/img/header-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center -90px;
+}
+
+.section-hero {
+  width: 500px;
+}
+
+.title {
+  font-family: 'Merriweather', serif;
+  font-weight: bold;
+  line-height: 2.0;
+}
+
+.hero-title {
+  font-size: var(--font-large);
+}
+
+.hero-text {
+  padding-right: 30px;
+  padding-bottom: 25px;
+  font-size: 20px;
+  line-height: 2.0;
+}
+
+.button {
+  width: 220px;
+  height: 55px;
+  font-size: 20px;
+  font-family: 'Inter', sans-serif;
+  line-height: 2.0;
+  text-align: center;
+  transition: color 0.3s;
+}
+
+.button-gold {
+  background: var(--color-gold);
+  color: var(--color-black);
+  border-color: var(--color-gold);
+}
+
+.button-black {
+  background: transparent;
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+.button:hover {
+  color: var(--color-white);
 }
