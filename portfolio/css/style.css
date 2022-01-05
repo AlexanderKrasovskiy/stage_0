@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "Merriweather";
+  src: url("./assets/fonts/Merriweather-Bold.ttf") format("truetype-variations");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter-VariableFont_slnt,wght.ttf") format("truetype-variations");
+  font-weight: 400 700;
+}
+
+:root {
+  --color-dark: #000000;
+  --color-gold: #bdae82;
+  --color-white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  outline: 1px solid orangered;
+  min-height: 20px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  /* font-family: 'Merriweather', serif; */
+}
+
+.container {
+  /* max-width: 1440px; */
+  width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
