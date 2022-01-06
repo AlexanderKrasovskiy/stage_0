@@ -300,3 +300,49 @@ body {
     contrast(87%);
   cursor: pointer;
 }
+
+.price-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 100px;
+}
+
+.price-item {
+  flex-basis: 450px;
+  column-gap: 25px;
+  row-gap: 50px;
+  padding: 40px;
+  border: 3px solid var(--color-gold);
+}
+
+.price-title {
+  font-size: 28px;
+  text-align: center;
+  letter-spacing: 2px;
+  padding-bottom: 20px;
+}
+
+.price-dollars {
+  font-size: 24px;
+  text-align: center;
+  color: var(--color-gold);
+  letter-spacing: 2px;
+  padding-bottom: 20px;
+}
+
+.price-description {
+  padding-bottom: 40px;
+}
+
+.price-description span {
+  display: block;
+  font-size: 18px;
+  line-height: 2.0;
+  text-align: center;
+}
+
+.price-button-container {
+  display: flex;
+  justify-content: center;
+}
