@@ -346,3 +346,54 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.contacts-container {
+  height: 700px;
+  display: flex;
+  justify-content: flex-end;
+  background: url("../assets/img/contacts-bg.jpg");
+  background-size: auto 700px;
+  background-position: center center;
+}
+
+.section-contacts {
+  padding-top: 60px;
+  width: 450px;
+}
+
+.contacts-title {
+  letter-spacing: 3px;
+}
+
+.contacts-form {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  /* width: 450px; */
+}
+
+.contacts-form input,
+.contacts-form textarea {
+  padding: 3px 20px;
+  border: 2px solid var(--color-gold);
+  font: inherit;
+  font-size: 20px;
+  line-height: 2.0;
+  color: var(--color-gold);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.contacts-form textarea {
+  resize: none;
+  padding-bottom: 13px;
+  margin-bottom: 10px;
+}
+
+.contacts-form input::placeholder,
+.contacts-form textarea::placeholder {
+  font: inherit;
+  color: var(--color-gold);
+  font-size: 20px;
+  line-height: 2.0;
+}
