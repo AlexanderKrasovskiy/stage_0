@@ -1,12 +1,12 @@
 @font-face {
   font-family: "Merriweather";
-  src: url("./assets/fonts/Merriweather-Bold.ttf");
+  src: url("../assets/fonts/Merriweather-Bold.ttf");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "Inter";
-  src: url("./assets/fonts/Inter-VariableFont_slnt,wght.ttf") format("truetype-variations");
+  src: url("../assets/fonts/Inter-VariableFont_slnt,wght.ttf") format("truetype-variations");
   font-weight: 400 700;
 }
 
@@ -45,12 +45,6 @@ body {
   padding: 0 20px;
 }
 
-/* @media (max-width: 768px) {
-  .container {
-    padding: 0;
-  }
-} */
-
 .header-container {
   display: flex;
   align-items: center;
@@ -73,6 +67,7 @@ body {
 .header-logo:hover {
   filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%)
     contrast(87%);
+  cursor: pointer;
 }
 
 .nav {
@@ -90,7 +85,6 @@ body {
   padding: 0 15px;
   font-size: 20px;
   line-height: 50px;
-  letter-spacing: 1px;
   text-decoration: none;
   color: var(--color-white);
   transition: color 0.3s;
@@ -136,7 +130,6 @@ body {
 
 .hero-title {
   font-size: var(--font-large);
-  letter-spacing: 3px;
 }
 
 .title-container {
@@ -149,7 +142,6 @@ body {
 .section-title {
   font-size: 40px;
   color: var(--color-gold);
-  letter-spacing: 2px;
 }
 
 .title-line {
@@ -194,13 +186,13 @@ body {
 .button-gold {
   background: var(--color-gold);
   color: var(--color-black);
-  border-color: var(--color-gold);
+  border: 2px solid var(--color-gold);
 }
 
 .button-transparent {
   background: transparent;
   color: var(--color-gold);
-  border-color: var(--color-gold);
+  border: 2px solid var(--color-gold);
 }
 
 .button:hover {
@@ -312,7 +304,6 @@ body {
 .price-title {
   font-size: 28px;
   text-align: center;
-  letter-spacing: 2px;
   padding-bottom: 20px;
 }
 
@@ -320,7 +311,6 @@ body {
   font-size: 24px;
   text-align: center;
   color: var(--color-gold);
-  letter-spacing: 2px;
   padding-bottom: 20px;
 }
 
@@ -352,10 +342,6 @@ body {
 .section-contacts {
   padding-top: 60px;
   width: 450px;
-}
-
-.contacts-title {
-  letter-spacing: 3px;
 }
 
 .contacts-form {
@@ -402,11 +388,10 @@ body {
   align-items: center;
   gap: 20px;
   font-size: 20px;
-  letter-spacing: 1px;
 }
 
 .rss {
-  padding-left: 14px;
+  padding-left: 18px;
 }
 
 .footer-link {
