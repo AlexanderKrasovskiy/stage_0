@@ -99,24 +99,18 @@ body {
 @media screen and (max-width: 768px) {
   .nav {
     display: none;
-    /* display: flex; */
     height: 100vh;
     width: 100%;
     justify-content: flex-end;
     position: absolute;
     top: 0;
     left: 0;
-    /* bottom: 0;
-    right: 0; */
     background-color: rgba(0, 0, 0, 0.5);
-    /* z-index: -1; */
     overflow-x: hidden;
-    
   }
 
   .nav.open {
     display: flex;
-    /* z-index: 1; */
   }
 }
 
@@ -125,7 +119,6 @@ body {
   align-items: center;
   list-style: none;
   padding: 0 15px;
-  /* z-index: 2; */
 }
 
 @media screen and (max-width: 768px) {
@@ -136,17 +129,13 @@ body {
     align-items: flex-start;
     padding: 134px 0px 0px 0px;
     background-color: var(--color-black);
-    /* transform: translateX(100%); */
     z-index: 2;
-    /* display: block; */
     position: relative;
     right: -620px;
-    transition: all 0.5s ease-out; /* how to fix it*/
+    transition: all 0.5s ease-out;
   }
   
   .nav-list.open {
-    /* transform: translateX(0%); */
-    
     right: 0;
   }
 
@@ -425,9 +414,6 @@ body {
 }
 
 .skill-text {
-  /* width: 280px; */
-  /* padding-bottom: 10px; */
-  /* margin: 0 auto; */
   text-align: center;
   font-size: 18px;
   line-height: var(--line-height-std);
@@ -540,7 +526,6 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* gap: 25px; */
   column-gap: 25px;
   row-gap: 50px;
   padding-bottom: 100px;
@@ -682,7 +667,6 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    /* gap: 20px; */
     padding-top: 27px;
     padding-bottom: 34px;
   }
