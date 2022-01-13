@@ -109,14 +109,14 @@ body {
     /* bottom: 0;
     right: 0; */
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    /* z-index: -1; */
     overflow-x: hidden;
     
   }
 
   .nav.open {
     display: flex;
-    
+    /* z-index: 1; */
   }
 }
 
@@ -125,6 +125,7 @@ body {
   align-items: center;
   list-style: none;
   padding: 0 15px;
+  /* z-index: 2; */
 }
 
 @media screen and (max-width: 768px) {
@@ -137,6 +138,7 @@ body {
     background-color: var(--color-black);
     /* transform: translateX(100%); */
     z-index: 2;
+    /* display: block; */
     position: relative;
     right: -620px;
     transition: all 0.5s ease-out; /* how to fix it*/
