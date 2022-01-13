@@ -208,6 +208,7 @@ body {
 
 @media screen and (max-width: 768px) {
   .section-hero {
+    width: auto;
     max-width: 500px;
   }
 }
@@ -329,8 +330,15 @@ body {
 
 .skills-items {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  column-gap: 40px;
   flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+  .skills-items {
+    column-gap: 44px;
+  }
 }
 
 .skill-item {
@@ -409,6 +417,7 @@ body {
 
 @media screen and (max-width: 768px) {
   .portfolio-items > * {
+    width: 100%;
     max-width: 450px;
   }
 }
@@ -497,6 +506,7 @@ body {
 
 @media screen and (max-width: 768px) {
   .price-item {
+    width: 100%;
     flex: 0 1 420px;
   }
 }
@@ -556,6 +566,8 @@ body {
 
 @media screen and (max-width: 768px) {
   .section-contacts {
+    width: 100%;
+    max-width: 450px;
     flex: 0 1 450px;
   }
   .contacts-title {
@@ -642,6 +654,7 @@ body {
   .rss {
     padding-left: 0;
     padding-bottom: 29px;
+    text-align: center;
   }
 }
 
