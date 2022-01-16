@@ -187,6 +187,10 @@ body {
   }
 }
 
+.lang {
+  transition: all 0.5s;
+}
+
 .lang:hover {
   cursor: pointer;
   color: var(--color-gold);
