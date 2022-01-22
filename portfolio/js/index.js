@@ -1,45 +1,58 @@
-const hamburger = document.querySelector('.hamburger');
-const nav = document.querySelector('.nav');
-const navList = document.querySelector('.nav-list');
+import i18Obj from './support/translate.js';
 
-hamburger.addEventListener('click', toggleMenu)
 
-function toggleMenu() {
-  hamburger.classList.toggle('open');
-  nav.classList.toggle('open');
-  setTimeout(() => {
-    navList.classList.toggle('open')
-  }, 1)
+/*==== Lang To Local Storage ============================================================*/
+
+let storedLang = 'en';
+
+function setLocalStorageLang() {
+  localStorage.setItem('lang', storedLang)
 }
+window.addEventListener('beforeunload', setLocalStorageLang);
 
-navList.addEventListener('click', closeMenu)
+function getLocalStorageLang() {
+  if (localStorage.getItem('lang')) {
+    // Change Language
+    storedLang = localStorage.getItem('lang');
+    translateToLang(storedLang);
 
-function closeMenu(event) {
-  if (event.target.classList.contains('nav-link')) {
-    nav.classList.remove('open')
-    navList.classList.remove('open')
-    hamburger.classList.remove('open')
+    // Style selected button
+    let langButtons = document.querySelectorAll('.lang');
+    langButtons.forEach(lan => {
+      lan.classList.remove('lang-selected');
+      if (lan.textContent == storedLang) {
+        lan.classList.add('lang-selected')
+      }
+    })
   }
 }
-
-console.log(`PART 1
-=======================================
-1. [+10] Верстка валидная
-2. [+20] Верстка семантическая
-3. [+48] Вёрстка соответствует макету
-4. [+12] Требования к CSS
-5. [+20] Интерактивность, реализуемая через css
-
-ИТОГО: [110 / 100]
+window.addEventListener('load', getLocalStorageLang);
 
 
+/*==== Lang Switch with Buttons ============================================================*/
 
-PART 2
-=======================================
-1. [+48] Вёрстка соответствует макету. Ширина экрана 768px
-2. [+15] Ни на одном из разрешений до 320px включительно не появляется горизонтальная полоса прокрутки
-3. [+20] На ширине экрана 768рх и меньше реализовано адаптивное меню
-        [2 / 4] при нажатии на крестик адаптивное меню плавно скрывается уезжая за правую часть экрана, крестик превращается в бургер-иконку
+let langSwitch = document.querySelector('.language-switch');
 
-ИТОГО: [83 / 75]
-`)
+langSwitch.addEventListener('click', (e) => {
+  const target = e.target;
+
+  // Change Language
+  if (!target.tagName == 'SPAN') return;
+  let lang = target.textContent;
+  if (lang == 'en / ru') return;
+  translateToLang(lang);
+  storedLang = lang;
+
+  // Style selected button
+  langSwitch.querySelectorAll('.lang').forEach(lan => {
+    lan.classList.remove('lang-selected');
+  })
+  target.classList.add('lang-selected')
+})
+
+function translateToLang(lang) {
+  const nodesForTranslation = document.querySelectorAll('[data-i18]');
+  nodesForTranslation.forEach(node => {
+    node.textContent = i18Obj[lang][node.dataset.i18]
+  })
+}
