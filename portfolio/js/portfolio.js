@@ -1,17 +1,17 @@
-/*= Image Caching ==========================================*/
+/*= Image Caching - Does not work ==========================================*/
 
-preloadImages();
+// preloadImages();
 
-function preloadImages() {
-  const seasons = ['winter', 'spring', 'summer', 'autumn'];
+// function preloadImages() {
+//   const seasons = ['winter', 'spring', 'summer', 'autumn'];
 
-  seasons.forEach(season => {
-    for (let i = 1; i <= 6; i++) {
-      const img = new Image();
-      img.src = `./assets/img/portfolio/${season}/${i}.jpg`;
-    }
-  });
-}
+//   seasons.forEach(season => {
+//     for (let i = 1; i <= 6; i++) {
+//       const img = new Image();
+//       img.src = `./assets/img/portfolio/${season}/${i}.jpg`;
+//     }
+//   });
+// }
 
 /*= Switching Images in Portfolio =============================*/
 
