@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+:root {
+  --primary-color: #22254b;
+  --secondary-color: #373b69;
+  --tertiary-color: #7378c5;
+
+  --top-rating: lightgreen;
+  --med-rating: orange;
+  --low-rating: red;
+
+  --tmdb-1: #0d253f;
+  --tmdb-2: #01b4e4;
+  --tmdb-3: #90cea1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.header,
+.main,
+.footer {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.header,
+.footer {
+  background-color: var(--secondary-color);
+}
+
+.main {
+  flex-grow: 1;
+  background-color: var(--primary-color);
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 15px 0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-box {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(-90deg, var(--tmdb-3), var(--tmdb-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-logo {
+  width: 70px;
+  height: 50px;
+  background-image: url("../assets/svg/logo-tmdb-square.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin-right: 10px;
+  transition: filter 0.3s ease-in-out;
+}
+
+.brand-logo:hover {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
+
+.brand-name {
+  line-height: 1.3;
+}
+
+.disclaimer {
+  font-size: 10px;
+  font-weight: 300;
+}
+
+.search-input {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 16px;
+  padding: 8px 16px;
+  padding-right: 60px;
+  color: var(--tmdb-2);
+}
+
+.search-input:focus {
+  outline: none;
+  background-color: var(--primary-color);
+}
+
+.search-input::placeholder {
+  color: var(--tertiary-color);
+}
+
+.search-box {
+  position: relative;
+}
+
+i[class*="fa-"] {
+  position: absolute;
+  top: 29%;
+  right: 4%;
+  color: var(--tertiary-color);
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+i[class="fas fa-times"] {
+  top: 24%;
+  right: 14%;
+  font-size: 24px;
+}
+
+
+i[class="fas fa-times hidden"] {
+  display: none;
+}
+
+i[class*="fa-"]:hover {
+  color: var(--tmdb-2);
+}
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.movie {
+  width: 300px;
+  height: 450px;
+  border-radius: 5px;
+}
+
+.movie-front {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.movie-front > img {
+  width: 100%;
+  height: 450px;
+}
+
+.front-rating {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.top {
+  color: var(--top-rating);
+}
+
+.med {
+  color: var(--med-rating);
+}
+
+.low {
+  color: var(--low-rating);
+}
+
+.front-title {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  padding: 8px 16px;
+  color: #fff;
+  background-color: var(--secondary-color);
+  letter-spacing: 0.5px;
+}
+
+.movie-back {
+  height: 100%;
+  border-radius: 5px;
+  padding: 8px 16px;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.back-title {
+  letter-spacing: 0.5px;
+}
+
+.year {
+  font-weight: normal;
+}
+
+.back-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.genres span {
+  margin-right: 3px;
+  margin-bottom: 3px;
+  padding: 0 4px;
+  border-radius: 5px;
+  color: #878787;
+  background-color: #e1e1e1;
+  font-size: 12px;
+}
+
+.back-rating {
+  padding: 4px 8px;
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.back-description {
+  font-size: 14px;
+}
+
+/* ============== TRANSITION STYLING START =================== */
+
+.movie {
+  cursor: pointer;
+  perspective: 1000px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out 0.1s;
+}
+
+.movie-front,
+.movie-back {
+  position: absolute;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out 0.1s;
+}
+
+.movie:hover .movie-front {
+  transform: rotateY(180deg);
+}
+
+.movie-back {
+  transform: rotateY(-180deg);
+}
+
+.movie:hover .movie-back {
+  transform: rotateY(0deg);
+}
+
+/* ============== TRANSITION STYLING END =================== */
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.footer-link {
+  display: block;
+  text-decoration: none;
+}
+
+.github {
+  width: 45px;
+  height: 45px;
+  background-image: url(../assets/svg/github.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: filter 0.5s ease-in-out;
+}
+
+.github:hover {
+  filter: invert(43%) sepia(89%) saturate(2722%) hue-rotate(155deg) brightness(97%) contrast(99%);
+}
+
+.copyright {
+  padding-left: 80px;
+  font-weight: bold;
+}
+
+.rss {
+  width: 121px;
+  height: 45px;
+  background-image: url(../assets/svg/rs_school_js.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 5px;
+}
