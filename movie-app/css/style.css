@@ -120,7 +120,7 @@
 i[class*="fa-"] {
   position: absolute;
   top: 29%;
-  right: 3%;
+  right: 4%;
   color: var(--tertiary-color);
   font-size: 20px;
   cursor: pointer;
@@ -135,4 +135,141 @@ i[class="fas fa-times"] {
 
 i[class*="fa-"]:hover {
   color: var(--tmdb-2);
+}
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.movie {
+  width: 300px;
+  height: 450px;
+  border-radius: 5px;
+}
+
+.movie-front {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.movie-front > img {
+  width: 100%;
+}
+
+.front-rating {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.2);
+  backdrop-filter: blur(3px);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.top {
+  color: var(--top-rating);
+}
+
+.med {
+  color: var(--med-rating);
+}
+
+.low {
+  color: var(--low-rating);
+}
+
+.front-title {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  padding: 8px 16px;
+  color: #fff;
+  /* color: var(--tmdb-2); */
+  background-color: var(--secondary-color);
+  letter-spacing: 0.5px;
+}
+
+.movie-back {
+  height: 100%;
+  border-radius: 5px;
+  padding: 8px 16px;
+  background-color: #fff;
+  overflow-y: hidden;
+}
+
+.back-title {
+  letter-spacing: 0.5px;
+}
+
+.year {
+  font-weight: normal;
+}
+
+.back-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .genres {
+  padding-bottom: 5px;
+} */
+
+.genres span {
+  padding: 0 4px;
+  border-radius: 5px;
+  color: #878787;
+  background-color: #e1e1e1;
+  font-size: 12px;
+}
+
+.back-rating {
+  padding: 4px 8px;
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+  /* backdrop-filter: blur(3px); */
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  /* display: block;
+  width: 44px;
+  margin-left: auto; */
+}
+
+/* .back-description {
+  font-size: 14px;
+} */
+
+.movie {
+  cursor: pointer;
+  perspective: 1000px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out 0.1s;
+}
+
+.movie-front,
+.movie-back {
+  position: absolute;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out 0.1s;
+}
+
+.movie:hover .movie-front {
+  transform: rotateY(180deg);
+}
+
+.movie-back {
+  transform: rotateY(-180deg);
+}
+
+.movie:hover .movie-back {
+  transform: rotateY(0deg);
 }
