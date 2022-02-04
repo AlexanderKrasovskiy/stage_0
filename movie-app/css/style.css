@@ -14,13 +14,10 @@
   --tmdb-3: #90cea1;
 }
 
-/* caret-color */
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* outline: 1px solid coral; */
 }
 
 .body {
@@ -197,7 +194,6 @@ i[class*="fa-"]:hover {
   width: 100%;
   padding: 8px 16px;
   color: #fff;
-  /* color: var(--tmdb-2); */
   background-color: var(--secondary-color);
   letter-spacing: 0.5px;
 }
@@ -224,10 +220,6 @@ i[class*="fa-"]:hover {
   align-items: center;
 }
 
-/* .genres {
-  padding-bottom: 5px;
-} */
-
 .genres {
   display: flex;
   flex-wrap: wrap;
@@ -247,17 +239,15 @@ i[class*="fa-"]:hover {
   padding: 4px 8px;
   border-radius: 5px;
   background-color: var(--secondary-color);
-  /* backdrop-filter: blur(3px); */
   font-weight: bold;
   letter-spacing: 0.5px;
-  /* display: block;
-  width: 44px;
-  margin-left: auto; */
 }
 
 .back-description {
   font-size: 14px;
 }
+
+/* ============== TRANSITION STYLING START =================== */
 
 .movie {
   cursor: pointer;
@@ -286,6 +276,8 @@ i[class*="fa-"]:hover {
 .movie:hover .movie-back {
   transform: rotateY(0deg);
 }
+
+/* ============== TRANSITION STYLING END =================== */
 
 .footer-container {
   display: flex;

@@ -1,31 +1,35 @@
-import genres from './support/genres.js'
+// IMPORTS
+import genres from './support/genres.js';
 
-const API_KEY = 'api_key=c3f2f908e782ed17e19472a6d81712c7';
 
-let urlPopular = `https://api.themoviedb.org/3/movie/popular?${API_KEY}&page=1`;
-
+// SELECTORS
 const mainContainer = document.querySelector('.main-container');
 const searchForm = document.querySelector('.search-box');
 const searchInput = document.querySelector('.search-input');
 const crossBtn = document.querySelector('.fa-times');
 const searchBtn = document.querySelector('.fa-search');
 
-// Config
-// https://api.themoviedb.org/3/configuration?api_key=c3f2f908e782ed17e19472a6d81712c7
 
-// Popular
-// https://api.themoviedb.org/3/movie/popular?api_key=c3f2f908e782ed17e19472a6d81712c7&page=1
+// API KEY
+const API_KEY = 'api_key=c3f2f908e782ed17e19472a6d81712c7';
 
-// IMGs
-// https://image.tmdb.org/t/p/w342/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
-// poster w342 / w500
-// other w300
 
-// Search
-// https://api.themoviedb.org/3/search/movie?api_key=c3f2f908e782ed17e19472a6d81712c7&query=Jack+Reacher
-// https://api.themoviedb.org/3/search/movie?api_key=c3f2f908e782ed17e19472a6d81712c7&query=Ava%20Tar
-// https://api.themoviedb.org/3/search/movie?api_key=c3f2f908e782ed17e19472a6d81712c7&query=batman%20robin&page=1&include_adult=true
+// EVENTS
+searchInput.addEventListener('input', showCrossBtn);
 
+crossBtn.addEventListener('click', clearInput);
+
+searchForm.addEventListener('submit', handleSubmit);
+
+searchBtn.addEventListener('click', handleSearchBtn);
+
+
+// START - QUERY POPULAR MOVIES
+let urlPopular = `https://api.themoviedb.org/3/movie/popular?${API_KEY}&page=1`;
+getData(urlPopular);
+
+
+// FUNCTIONS
 async function getData(url) {
   try {
     const res = await fetch(url);
@@ -36,8 +40,6 @@ async function getData(url) {
     console.error(e)
   }
 };
-
-getData(urlPopular);
 
 function showData(results) {
   let result = [];
@@ -100,21 +102,6 @@ function buildGenres(ids) {
   return result;
 };
 
-searchInput.addEventListener('input', (e) => {
-  if (e.target.value) {
-    crossBtn.classList.remove('hidden')
-  } else {
-    crossBtn.classList.add('hidden')
-  }
-});
-
-crossBtn.addEventListener('click', () => {
-  searchInput.value = '';
-  crossBtn.classList.add('hidden');
-});
-
-searchForm.addEventListener('submit', handleSubmit);
-
 function handleSubmit(e) {
   e.preventDefault();
   let val = e.target[0].value;
@@ -125,8 +112,6 @@ function handleSubmit(e) {
   getData(urlSearch);
 };
 
-searchBtn.addEventListener('click', handleSearchBtn);
-
 function handleSearchBtn() {
   let val = searchInput.value;
   let query = val.split(' ').join('+');
@@ -135,3 +120,16 @@ function handleSearchBtn() {
 
   getData(urlSearch);
 }
+
+function showCrossBtn(e) {
+  if (e.target.value) {
+    crossBtn.classList.remove('hidden')
+  } else {
+    crossBtn.classList.add('hidden')
+  }
+};
+
+function clearInput() {
+  searchInput.value = '';
+  crossBtn.classList.add('hidden');
+};
