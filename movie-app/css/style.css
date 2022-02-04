@@ -20,7 +20,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  outline: 1px solid coral;
+  /* outline: 1px solid coral; */
 }
 
 .body {
@@ -133,6 +133,11 @@ i[class="fas fa-times"] {
   font-size: 24px;
 }
 
+
+i[class="fas fa-times hidden"] {
+  display: none;
+}
+
 i[class*="fa-"]:hover {
   color: var(--tmdb-2);
 }
@@ -167,8 +172,8 @@ i[class*="fa-"]:hover {
   right: 0px;
   padding: 4px 8px;
   border-radius: 5px;
-  background-color: rgba(0,0,0,0.2);
-  backdrop-filter: blur(3px);
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
   font-weight: bold;
   letter-spacing: 0.5px;
 }
@@ -202,7 +207,7 @@ i[class*="fa-"]:hover {
   border-radius: 5px;
   padding: 8px 16px;
   background-color: #fff;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .back-title {
@@ -223,7 +228,14 @@ i[class*="fa-"]:hover {
   padding-bottom: 5px;
 } */
 
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .genres span {
+  margin-right: 3px;
+  margin-bottom: 3px;
   padding: 0 4px;
   border-radius: 5px;
   color: #878787;
@@ -243,9 +255,9 @@ i[class*="fa-"]:hover {
   margin-left: auto; */
 }
 
-/* .back-description {
+.back-description {
   font-size: 14px;
-} */
+}
 
 .movie {
   cursor: pointer;
