@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="shortcut icon" href="./assets/hash.png" type="image/x-icon">
+  <title>Tic Tac Toe</title>
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container header-container">
+      <h1>AI Tic-Tac-Toe</h1>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container main-container">
+
+      <div class="wrapper">
+
+        <div class="field">
+          <!-- add X or O class -->
+          <div class="board">
+            <div class="cell x">X</div>
+            <div class="cell mid-col o">O</div>
+            <div class="cell x">X</div>
+            <div class="cell mid-row"></div>
+            <div class="cell mid-col mid-row"></div>
+            <div class="cell mid-row o">O</div>
+            <div class="cell x">X</div>
+            <div class="cell mid-col o">O</div>
+            <div class="cell x">X</div>
+          </div>
+
+          <div class="info">
+            <div>
+              <div>Turn: <span class="turn">X</span></div>
+              <div>Step: <span class="step">7</span></div>
+            </div>
+            <button class="btn restart-btn"></button>
+          </div>
+
+        </div>
+
+        <div class="records">
+          <div class="records-table">
+            <h3>Last 10 games:</h3>
+            <ol class="results">
+              <li>Victory in 5 steps</li>
+              <li>Draw</li>
+              <li>Loss in 7 steps</li>
+              <li>0</li>
+              <li>0</li>
+              <li>0</li>
+              <li>0</li>
+              <li>0</li>
+              <li>0</li>
+              <li>0</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- add ACTIVE class -->
+      <div class="overlay"></div>
+      
+      <div class="modal opponent">
+        <h3 class="opponent-message">Choose Your Opponent</h3>
+        <div>
+          <button class="btn human-btn">Human</button>
+          <button class="btn ai-btn">AI</button>
+        </div>
+      </div>
+
+      <div class="modal player">
+        <h3 class="player-message">Choose Your Player</h3>
+        <div>
+          <button class="btn x-btn">X</button>
+          <button class="btn o-btn">O</button>
+        </div>
+      </div>
+
+      <div class="modal result">
+        <h3 class="result-message">X won in 5 steps / Draw</h3>
+        <button class="btn restart-btn"></button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-container">
+      
+      <a class="footer-link github" href="https://github.com/AlexanderKrasovskiy" target="_blank"></a>
+      
+      <div class="copyright">
+        <span>2022</span>
+      </div>
+      
+      <a class="footer-link rss" href="https://rs.school/js-stage0/" target="_blank"></a>
+
+    </div>
+  </footer>
+
+  <script src="./js/script.js"></script>
+</body>
+
+</html>
