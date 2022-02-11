@@ -154,6 +154,10 @@ body {
   background-image: url('../assets/img/restart-btn.png');
 }
 
+.settings-btn {
+  background-image: url('../assets/img/settings-btn.png');
+}
+
 
 
 /* ===================== RESULTS TABLE ===================== */

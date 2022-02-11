@@ -4,6 +4,7 @@ const cells = document.querySelectorAll('.cell');
 const turn = document.querySelector('.turn');
 const step = document.querySelector('.step');
 
+const settingsBtns = document.querySelectorAll('.settings-btn');
 const restartBtns = document.querySelectorAll('.restart-btn');
 
 const tenResults = document.querySelector('.results');
@@ -54,6 +55,9 @@ let recordsHistory = [];
 modalOpponent.addEventListener('click', handleOpponentChoice);
 modalPlayer.addEventListener('click', handlePlayerChoice);
 board.addEventListener('click', handleCellClick);
+settingsBtns.forEach(btn => {
+  btn.addEventListener('click', openSettings)
+});
 restartBtns.forEach(btn => {
   btn.addEventListener('click', restartGame)
 });
@@ -248,6 +252,27 @@ function restartGame() {
   if (opponent == 'AI' && player == 'O') {
     moveAI()
   }
+};
+
+function openSettings() {
+  // update State
+  currentPlayer = 'X';
+  counter = 0;
+  virtBoard.fill('');
+  // clear board styles
+  cells.forEach(cell => {
+    cell.classList.remove('o');
+    cell.classList.remove('x');
+    cell.innerText = '';
+  });
+  // reset Info
+  turn.innerText = 'X';
+  step.innerText = '0';
+  // close resultModal
+  modalResult.classList.remove('active');
+  overlay.classList.add('active');
+  // open 1st settings Modal
+  modalOpponent.classList.add('active');
 };
 
 function setLocalStorage() {

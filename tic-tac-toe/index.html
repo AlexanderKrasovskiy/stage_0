@@ -42,7 +42,10 @@
               <div>Turn: <span class="turn">X</span></div>
               <div>Step: <span class="step">0</span></div>
             </div>
-            <button class="btn restart-btn" title="Reload Matrix"></button>
+            <div>
+              <button class="btn settings-btn"></button>
+              <button class="btn restart-btn" title="Reload Matrix"></button>
+            </div>
           </div>
 
         </div>
@@ -67,22 +70,25 @@
       <div class="modal opponent active">
         <h3 class="opponent-message">Choose Your Opponent</h3>
         <div>
-          <button class="btn human-btn">Human</button>
-          <button class="btn ai-btn">AI</button>
+          <button class="btn human-btn" title="2-player game">Human</button>
+          <button class="btn ai-btn" title="MiniMax Algo - Unbeatable">AI</button>
         </div>
       </div>
 
       <div class="modal player">
         <h3 class="player-message">Choose Your Player</h3>
         <div>
-          <button class="btn x-btn">X</button>
-          <button class="btn o-btn">O</button>
+          <button class="btn x-btn" title="1st turn">X</button>
+          <button class="btn o-btn" title="2nd turn">O</button>
         </div>
       </div>
 
       <div class="modal result">
         <h3 class="result-message">X won in 5 steps / Draw</h3>
-        <button class="btn restart-btn" title="Reload Matrix"></button>
+        <div>
+          <button class="btn settings-btn"></button>
+          <button class="btn restart-btn" title="Reload Matrix"></button>
+        </div>
       </div>
 
     </div>
