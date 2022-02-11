@@ -6,7 +6,7 @@
   --o-color: rgb(242, 235, 211);
   --hash-color: rgb(13, 161, 146);
 
-  --board-size: 300px;
+  --board-size: 373px;
   --hash-width: 6px;
 }
 
@@ -54,10 +54,10 @@ body {
 
 .wrapper {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-content: center;
 }
 
@@ -127,6 +127,7 @@ body {
   padding: 5px 10px;
   font-size: 24px;
   font-weight: 700;
+  font-family: inherit;
   cursor: pointer;
   outline: none;
   color: var(--x-color);
@@ -213,6 +214,16 @@ body {
 
 .modal.active {
   display: flex;
+}
+
+.modal.opponent {
+  transform: translate(-50%, -50%) rotateZ(1deg);
+  transform-origin: center;
+}
+
+.modal.player {
+  transform: translate(-50%, -50%) rotateZ(-1deg);
+  transform-origin: center;
 }
 
 
