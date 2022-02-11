@@ -80,15 +80,52 @@ function handlePlayerChoice(e) {
     player = 'X';
     modalPlayer.classList.remove('active');
     overlay.classList.remove('active');
-    // startGame(opponent, player);
+
+    startGame(opponent, player);
   };
   if (e.target.classList.contains('o-btn')) {
     player = 'O';
     modalPlayer.classList.remove('active');
     overlay.classList.remove('active');
-    // startGame(opponent, player);
+
+    startGame(opponent, player);
   };
 };
+
+
+function startGame(opponent, player) {
+  if (opponent == 'AI' && player == 'O') {
+    moveAI()
+  }
+};
+
+function moveAI() {
+  // choose idx
+  let cellIdx = chooseIdx(virtBoard);
+  // update virtBoard
+  virtBoard[cellIdx] = currentPlayer;
+  // (timeout 500ms)
+  setTimeout(() => {
+    // update cell
+    cells[cellIdx].innerText = currentPlayer;
+    cells[cellIdx].classList.add(currentPlayer.toLowerCase());
+    // check Win
+    checkGameOver();
+    // flip Curr Player
+    (currentPlayer == 'X') ? currentPlayer = 'O' : currentPlayer = 'X';
+    // update Info Board
+    turn.innerText = currentPlayer;
+    counter++;
+    step.innerText = counter;
+  }, 500);
+};
+
+function chooseIdx(board) {
+  for (let i = 0; i< board.length; i++) {
+    if (board[i] == '') return i
+  }
+};
+
 
 function handleCellClick(e) {
   if (e.target.innerText == '') {
@@ -111,12 +148,12 @@ function handleCellClick(e) {
     turn.innerText = currentPlayer;
     counter++;
     step.innerText = counter;
+
+    if (opponent == 'AI' && !checkWin(virtBoard)) {
+      moveAI()
+    }
   }
 };
-
-// function startGame(opponent, player) {
-
-// };
 
 function checkWin(board) {
   let win = false;
@@ -207,6 +244,10 @@ function restartGame() {
   // close resultModal
   modalResult.classList.remove('active');
   overlay.classList.remove('active');
+  // if vs AI and go 2nd, make AI move
+  if (opponent == 'AI' && player == 'O') {
+    moveAI()
+  }
 };
 
 function setLocalStorage() {
