@@ -28,6 +28,7 @@ let player = 'X';
 // State
 let currentPlayer = 'X';
 let counter = 0;
+let currentWinCombo = [];
 
 let virtBoard = [
   '', '', '',
@@ -173,6 +174,13 @@ function checkWin(board) {
 
 function checkGameOver() {
   if (checkWin(virtBoard)) {
+    // paint cells
+    // - find winCombo
+    // - setWinCombo
+    // - add win class
+    paintWinCells();
+    // -- in Restart & Settings remove win class, clear currWinCombo
+
     // show modal with text WIN
     showResultModal(true);
     let who = (currentPlayer == player) ? 'You' : opponent;
@@ -240,6 +248,7 @@ function restartGame() {
   cells.forEach(cell => {
     cell.classList.remove('o');
     cell.classList.remove('x');
+    cell.classList.remove('win');
     cell.innerText = '';
   });
   // reset Info
@@ -263,6 +272,7 @@ function openSettings() {
   cells.forEach(cell => {
     cell.classList.remove('o');
     cell.classList.remove('x');
+    cell.classList.remove('win');
     cell.innerText = '';
   });
   // reset Info
@@ -287,3 +297,21 @@ function getLocalStorage() {
   recordsHistory = storedRecords;
   refreshListContent();
 }
+
+function findWinCombo(board) {
+  for (let [a, b ,c] of winSequences) {
+    if (board[a] == '') continue;
+    if(board[a] == board[b] && board[b] == board[c]) {
+      currentWinCombo = [a, b, c];
+      break
+    }
+  }
+};
+
+function paintWinCells() {
+  findWinCombo(virtBoard);
+  console.log(currentWinCombo);
+  for (let idx of currentWinCombo) {
+    cells[idx].classList.add('win')
+  }
+};

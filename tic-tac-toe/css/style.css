@@ -83,6 +83,22 @@ body {
   border-right: var(--hash-width) solid var(--hash-color);
 }
 
+.cell:nth-child(1) {
+  border-top-left-radius: 15px;
+}
+
+.cell:nth-child(3) {
+  border-top-right-radius: 15px;
+}
+
+.cell:nth-child(7) {
+  border-bottom-left-radius: 15px;
+}
+
+.cell:nth-child(9) {
+  border-bottom-right-radius: 15px;
+}  
+
 .cell {
   width: calc(var(--board-size) / 3);
   height: calc(var(--board-size) / 3);
@@ -101,6 +117,10 @@ body {
 
 .cell.o {
   color: var(--o-color);
+}
+
+.cell.win {
+  background-color: rgba(255, 127, 80, 0.6);
 }
 
 .info {
