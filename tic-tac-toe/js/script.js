@@ -106,7 +106,10 @@ function startGame(opponent, player) {
 
 function moveAI() {
   // choose idx
-  let cellIdx = chooseIdx(virtBoard);
+
+  //let cellIdx = chooseIdx(virtBoard);
+  let cellIdx = findBestMove(virtBoard, currentPlayer);
+
   // update virtBoard
   virtBoard[cellIdx] = currentPlayer;
   // (timeout 500ms)
@@ -124,13 +127,13 @@ function moveAI() {
     step.innerText = counter;
   }, 500);
 };
-
+//////////////////////////////////////
 function chooseIdx(board) {
   for (let i = 0; i< board.length; i++) {
     if (board[i] == '') return i
   }
 };
-
+//////////////////////////////////////
 
 function handleCellClick(e) {
   if (e.target.innerText == '') {
@@ -154,7 +157,7 @@ function handleCellClick(e) {
     counter++;
     step.innerText = counter;
 
-    if (opponent == 'AI' && !checkWin(virtBoard)) {
+    if (opponent == 'AI' && !checkWin(virtBoard) && isMovesLeft(virtBoard)) {
       moveAI()
     }
   }
@@ -166,7 +169,7 @@ function checkWin(board) {
     if (board[a] == '') continue;
     if(board[a] == board[b] && board[b] == board[c]) {
       win = true;
-      break
+      break;
     }
   }
   return win
@@ -188,7 +191,7 @@ function checkGameOver() {
     composeResultMsg(msg);
     // print results
     printResultsToTable(msg);
-  } else if (countEmptyCells(virtBoard) == 0) {
+  } else if (!isMovesLeft(virtBoard)) {
     // show modal with text DRAW
     showResultModal(true);
     let msg = 'It\'s a Draw';
@@ -198,14 +201,14 @@ function checkGameOver() {
   }
 };
 
-function countEmptyCells(board) {
-  let num = 0;
+function isMovesLeft(board) {
+  //let num = 0;
   for (let cell of board) {
     if (cell == '') {
-      num += 1
+      return true
     }
   }
-  return num
+  return false
 };
 
 function showResultModal(bool) {
@@ -310,8 +313,123 @@ function findWinCombo(board) {
 
 function paintWinCells() {
   findWinCombo(virtBoard);
-  console.log(currentWinCombo);
+  //console.log(currentWinCombo);
   for (let idx of currentWinCombo) {
     cells[idx].classList.add('win')
   }
 };
+
+////////////////////////////////////////////////////////////
+
+let minMaxCounter = 0; // DEL ////////////
+
+function findBestMove(board, currPlayer) {
+
+  let beneficiar = currPlayer;
+  //let opponent = (currPlayer === 'X') ? 'O' : 'X';
+
+  //debugger;
+  let maxScore = -1000;
+  let bestIdx;
+
+  for (let i = 0; i < board.length; i++) {
+    if (board[i] !== '') continue;
+
+    board[i] = currPlayer;
+    let score = minMax(board, 0, false, currPlayer, beneficiar); //
+    board[i] = '';
+
+    if (score > maxScore) {
+      maxScore = score;
+      bestIdx = i
+    }
+  }
+  console.log(minMaxCounter, 'minMax steps');  // DEL
+  minMaxCounter = 0; // DEL
+  return bestIdx
+};
+
+function minMax(board, depth, isMax, currPlayer, beneficiar) { // 
+  minMaxCounter +=1; /////// DEL
+  let boardEvaluation = evaluateBoardForCurrPlayer(board, beneficiar); // 10 / -10 / undefined
+  
+  if (boardEvaluation === 10) return (10 - depth);
+  if (boardEvaluation === -10) return (-10 + depth);
+  if (!isMovesLeft(board)) return 0;
+
+  let bestScore;
+  // let bestIdx;
+
+  if (isMax) {
+    bestScore = -1000;
+    // bestIdx = -1;
+    (currPlayer === 'X') ? (currPlayer = 'O') : (currPlayer = 'X');
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] !== '') continue;
+      board[i] = currPlayer;
+      let score = minMax(board, depth + 1, false, currPlayer, beneficiar);
+      board[i] = '';
+      if (score > bestScore) {
+        bestScore = score;
+        // bestIdx = i;
+      };
+    }
+  } else {
+    bestScore = 1000;
+    // bestIdx = -1;
+    (currPlayer === 'X') ? (currPlayer = 'O') : (currPlayer = 'X');
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] !== '') continue;
+      board[i] = currPlayer;
+      let score = minMax(board, depth + 1, true, currPlayer, beneficiar);
+      board[i] = '';
+      if (score < bestScore) {
+        bestScore = score;
+        // bestIdx = i;
+      };
+    }
+  }
+
+  // if (depth === 0) return bestIdx;
+  return bestScore
+};
+
+// function checkWinForCurrPlayer(board, player) {
+//   let win = false;
+//   for (let [a, b ,c] of winSequences) {
+//     if (board[a] == '') continue;
+//     if (board[a] !== player) continue;
+//     if(board[a] == board[b] && board[b] == board[c]) {
+//       win = true;
+//       break;
+//     }
+//   }
+//   return win
+// };
+
+function evaluateBoardForCurrPlayer(board, player) {
+  for (let [a, b ,c] of winSequences) {
+    if (board[a] === '') continue;
+    if(board[a] === board[b] && board[b] === board[c]) {
+      if (board[a] === player) return 10;
+      return -10;
+    }
+  }
+};
+
+// let testBoard = [
+//   'O', '', 'X',
+//   'O', 'X', '',
+//   '', '', ''
+// ];
+// console.log(evaluateBoardForCurrPlayer(testBoard, 'X'))
+
+
+// let testBoard = [
+//   'O', '', 'X',
+//   '', 'X', '',
+//   '', '', ''
+// ];
+
+// let result = findBestMove(testBoard, 'O');
+// console.log(result, 'must = 6');
