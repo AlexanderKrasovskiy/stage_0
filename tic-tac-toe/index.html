@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="shortcut icon" href="./assets/hash.png" type="image/x-icon">
+  <title>Tic Tac Toe</title>
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container header-container">
+      <h1>AI Tic-Tac-Toe</h1>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container main-container">
+
+      <div class="wrapper">
+
+        <div class="field">
+          <!-- add X or O class -->
+          <div class="board">
+            <div class="cell" data-cell="0"></div>
+            <div class="cell mid-col" data-cell="1"></div>
+            <div class="cell" data-cell="2"></div>
+            <div class="cell mid-row" data-cell="3"></div>
+            <div class="cell mid-col mid-row" data-cell="4"></div>
+            <div class="cell mid-row" data-cell="5"></div>
+            <div class="cell" data-cell="6"></div>
+            <div class="cell mid-col" data-cell="7"></div>
+            <div class="cell" data-cell="8"></div>
+          </div>
+
+          <div class="info">
+            <div>
+              <div>Turn: <span class="turn">X</span></div>
+              <div>Step: <span class="step">0</span></div>
+            </div>
+            <div>
+              <button class="btn settings-btn"></button>
+              <button class="btn restart-btn" title="Reload Matrix"></button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="records">
+          <div class="records-table">
+            <h3>Last 10 games:</h3>
+            <ol class="results">
+              <li>no history yet</li>
+              <li>...</li>
+              <li>...wake up, Neo!</li>
+              <li>You should fight the machines!</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- add ACTIVE class -->
+      <div class="overlay active"></div>
+      
+      <div class="modal opponent active">
+        <h3 class="opponent-message">Choose Your Opponent</h3>
+        <div>
+          <button class="btn human-btn" title="2-player game">Human</button>
+          <button class="btn ai-btn" title="MiniMax Algo - Unbeatable">AI</button>
+        </div>
+      </div>
+
+      <div class="modal player">
+        <h3 class="player-message">Choose Your Player</h3>
+        <div>
+          <button class="btn x-btn" title="1st turn">X</button>
+          <button class="btn o-btn" title="2nd turn">O</button>
+        </div>
+      </div>
+
+      <div class="modal result">
+        <h3 class="result-message">X won in 5 steps / Draw</h3>
+        <div>
+          <button class="btn settings-btn"></button>
+          <button class="btn restart-btn" title="Reload Matrix"></button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-container">
+      
+      <a class="footer-link github" href="https://github.com/AlexanderKrasovskiy" target="_blank"></a>
+      
+      <div class="copyright">
+        <span>2022</span>
+      </div>
+      
+      <a class="footer-link rss" href="https://rs.school/js-stage0/" target="_blank"></a>
+
+    </div>
+  </footer>
+
+  <script src="./js/script.js"></script>
+  <script src="./js/score.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&display=swap');
+
+:root {
+  --bg-color: rgb(20, 189, 172);
+  --x-color: rgb(84, 84, 84);
+  --o-color: rgb(242, 235, 211);
+  --hash-color: rgb(13, 161, 146);
+
+  --board-size: 373px;
+  --hash-width: 6px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto Mono', monospace;
+  background-color: var(--bg-color);
+  color: var(--x-color);
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.main-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.field,
+.records {
+  width: var(--board-size);
+  margin: 20px;
+}
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  width: var(--board-size);
+}
+
+.mid-row {
+  border-top: var(--hash-width) solid var(--hash-color);
+  border-bottom: var(--hash-width) solid var(--hash-color);
+}
+
+.mid-col {
+  border-left: var(--hash-width) solid var(--hash-color);
+  border-right: var(--hash-width) solid var(--hash-color);
+}
+
+.cell:nth-child(1) {
+  border-top-left-radius: 15px;
+}
+
+.cell:nth-child(3) {
+  border-top-right-radius: 15px;
+}
+
+.cell:nth-child(7) {
+  border-bottom-left-radius: 15px;
+}
+
+.cell:nth-child(9) {
+  border-bottom-right-radius: 15px;
+}  
+
+.cell {
+  width: calc(var(--board-size) / 3);
+  height: calc(var(--board-size) / 3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 60px;
+  font-weight: 700;
+}
+
+.cell.o,
+.cell.x {
+  cursor: not-allowed;
+}
+
+.cell.o {
+  color: var(--o-color);
+}
+
+.cell.win {
+  background-color: rgba(255, 127, 80, 0.6);
+}
+
+.info {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.turn,
+.step {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+
+
+/* ===================== BUTTON STYLES ===================== */
+
+.btn {
+  height: 50px;
+  min-width: 70px;
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 24px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  color: var(--x-color);
+  background-color: rgba(255, 127, 80, 0.8);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px var(--hash-color);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.btn:hover {
+  background-color: rgba(255, 127, 80, 1);
+}
+
+.btn:active {
+  background-color: rgba(255, 127, 80, 1);
+  box-shadow: 0 5px var(--x-color);
+  transform: translateY(4px);
+}
+
+.restart-btn {
+  background-image: url('../assets/img/restart-btn.png');
+}
+
+.settings-btn {
+  background-image: url('../assets/img/settings-btn.png');
+}
+
+
+
+/* ===================== RESULTS TABLE ===================== */
+
+.results {
+  margin-top: 10px;
+  list-style-position: inside;
+}
+
+.results li {
+  padding: 3px 0;
+}
+
+
+
+/* ===================== OVERLAY STYLES ===================== */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+.modal {
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  border: 4px solid var(--hash-color);
+  border-radius: 30px;
+  color: var(--x-color);
+  background-color: var(--bg-color);
+
+  box-shadow: inset 0 0 20px var(--x-color);
+}
+
+.modal h3 {
+  text-align: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal.opponent {
+  transform: translate(-50%, -50%) rotateZ(1deg);
+  transform-origin: center;
+}
+
+.modal.player {
+  transform: translate(-50%, -50%) rotateZ(-1deg);
+  transform-origin: center;
+}
+
+
+
+/* ===================== FOOTER STYLES ===================== */
+
+.footer-container {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: var(--x-color);
+}
+
+.footer-link {
+  display: block;
+  text-decoration: none;
+}
+
+.github {
+  width: 45px;
+  height: 45px;
+  background-image: url(../assets/img/github.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.copyright {
+  padding-left: 80px;
+  font-weight: 700;
+}
+
+.rss {
+  width: 121px;
+  height: 45px;
+  background-image: url(../assets/img/rs_school_js.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
