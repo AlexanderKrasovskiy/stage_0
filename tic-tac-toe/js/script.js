@@ -336,7 +336,7 @@ function findBestMove(board, currPlayer) {
     if (board[i] !== '') continue;
 
     board[i] = currPlayer;
-    let score = minMax(board, 0, false, currPlayer, beneficiar); //
+    let score = minMax(board, 0, false, currPlayer, beneficiar, -2000, 2000); // alpha , betha
     board[i] = '';
 
     if (score > maxScore) {
@@ -349,7 +349,7 @@ function findBestMove(board, currPlayer) {
   return bestIdx
 };
 
-function minMax(board, depth, isMax, currPlayer, beneficiar) { // 
+function minMax(board, depth, isMax, currPlayer, beneficiar, alpha , betha) { // 
   minMaxCounter +=1; /////// DEL
   let boardEvaluation = evaluateBoardForCurrPlayer(board, beneficiar); // 10 / -10 / undefined
   
@@ -367,12 +367,16 @@ function minMax(board, depth, isMax, currPlayer, beneficiar) { //
     for (let i = 0; i < board.length; i++) {
       if (board[i] !== '') continue;
       board[i] = currPlayer;
-      let score = minMax(board, depth + 1, false, currPlayer, beneficiar);
+      let score = minMax(board, depth + 1, false, currPlayer, beneficiar, alpha , betha);
       board[i] = '';
       if (score > bestScore) {
         bestScore = score;
         // bestIdx = i;
       };
+      // alpha - betha Pruning
+      if (score > alpha) alpha = score;
+      if (alpha >= betha) break;
+
     }
   } else {
     bestScore = 1000;
@@ -381,12 +385,16 @@ function minMax(board, depth, isMax, currPlayer, beneficiar) { //
     for (let i = 0; i < board.length; i++) {
       if (board[i] !== '') continue;
       board[i] = currPlayer;
-      let score = minMax(board, depth + 1, true, currPlayer, beneficiar);
+      let score = minMax(board, depth + 1, true, currPlayer, beneficiar, alpha , betha);
       board[i] = '';
       if (score < bestScore) {
         bestScore = score;
         // bestIdx = i;
       };
+      // alpha - betha Pruning
+      if (score < betha) betha = score;
+      if (alpha >= betha) break;      
+
     }
   }
 
