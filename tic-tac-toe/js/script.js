@@ -21,11 +21,11 @@ const oBtn = document.querySelector('.o-btn');
 
 const resultMessage = document.querySelector('.result-message');
 
-// Settings from Modals
+// ================ Settings from Modals ================
 let opponent = 'Opponent';
 let player = 'X';
 
-// State
+// ================ State ================
 let currentPlayer = 'X';
 let counter = 0;
 let currentWinCombo = [];
@@ -52,7 +52,7 @@ const winSequences = [
 let recordsHistory = [];
 
 
-
+// ================ Event Listeners ================
 modalOpponent.addEventListener('click', handleOpponentChoice);
 modalPlayer.addEventListener('click', handlePlayerChoice);
 board.addEventListener('click', handleCellClick);
@@ -66,7 +66,7 @@ window.addEventListener('beforeunload', setLocalStorage);
 window.addEventListener('load', getLocalStorage);
 
 
-
+// ================ Functions ================
 function handleOpponentChoice(e) {
   if (e.target.classList.contains('human-btn')) {
     opponent = 'Opponent';
@@ -106,12 +106,11 @@ function startGame(opponent, player) {
 
 function moveAI() {
   // choose idx
-
-  //let cellIdx = chooseIdx(virtBoard);
   let cellIdx = findBestMove(virtBoard, currentPlayer);
 
   // update virtBoard
   virtBoard[cellIdx] = currentPlayer;
+
   // (timeout 500ms)
   setTimeout(() => {
     // update cell
@@ -127,13 +126,6 @@ function moveAI() {
     step.innerText = counter;
   }, 500);
 };
-//////////////////////////////////////
-function chooseIdx(board) {
-  for (let i = 0; i< board.length; i++) {
-    if (board[i] == '') return i
-  }
-};
-//////////////////////////////////////
 
 function handleCellClick(e) {
   if (e.target.innerText == '') {
@@ -141,7 +133,6 @@ function handleCellClick(e) {
     const cellIdx = +e.target.dataset.cell;
     virtBoard[cellIdx] = currentPlayer;
     
-
     // update Cell
     e.target.innerText = currentPlayer;
     e.target.classList.add(currentPlayer.toLowerCase());
@@ -178,31 +169,29 @@ function checkWin(board) {
 function checkGameOver() {
   if (checkWin(virtBoard)) {
     // paint cells
-    // - find winCombo
-    // - setWinCombo
-    // - add win class
     paintWinCells();
-    // -- in Restart & Settings remove win class, clear currWinCombo
 
     // show modal with text WIN
     showResultModal(true);
     let who = (currentPlayer == player) ? 'You' : opponent;
     let msg = `${currentPlayer} (${who}) won in ${(counter + 1)} steps!`;
     composeResultMsg(msg);
+
     // print results
     printResultsToTable(msg);
+
   } else if (!isMovesLeft(virtBoard)) {
     // show modal with text DRAW
     showResultModal(true);
     let msg = 'It\'s a Draw';
     composeResultMsg(msg);
+
     // print results
     printResultsToTable(msg);
   }
 };
 
 function isMovesLeft(board) {
-  //let num = 0;
   for (let cell of board) {
     if (cell == '') {
       return true
@@ -313,22 +302,19 @@ function findWinCombo(board) {
 
 function paintWinCells() {
   findWinCombo(virtBoard);
-  //console.log(currentWinCombo);
+  
   for (let idx of currentWinCombo) {
     cells[idx].classList.add('win')
   }
 };
 
-////////////////////////////////////////////////////////////
 
-let minMaxCounter = 0; // DEL ////////////
+// ===================== MiniMax + depth + A-B Pruning =====================
 
 function findBestMove(board, currPlayer) {
 
-  let beneficiar = currPlayer;
-  //let opponent = (currPlayer === 'X') ? 'O' : 'X';
+  let beneficiar = currPlayer; // for eval function
 
-  //debugger;
   let maxScore = -1000;
   let bestIdx;
 
@@ -344,53 +330,59 @@ function findBestMove(board, currPlayer) {
       bestIdx = i
     }
   }
-  console.log(minMaxCounter, 'minMax steps');  // DEL
-  minMaxCounter = 0; // DEL
+
   return bestIdx
 };
 
-function minMax(board, depth, isMax, currPlayer, beneficiar, alpha , betha) { // 
-  minMaxCounter +=1; /////// DEL
-  let boardEvaluation = evaluateBoardForCurrPlayer(board, beneficiar); // 10 / -10 / undefined
+function minMax(board, depth, isMax, currPlayer, beneficiar, alpha , betha) {
+
+  let boardEvaluation = evaluateBoardForCurrPlayer(board, beneficiar); // +10 / -10 / undefined
   
   if (boardEvaluation === 10) return (10 - depth);
   if (boardEvaluation === -10) return (-10 + depth);
   if (!isMovesLeft(board)) return 0;
 
   let bestScore;
-  // let bestIdx;
 
   if (isMax) {
+
     bestScore = -1000;
-    // bestIdx = -1;
+
     (currPlayer === 'X') ? (currPlayer = 'O') : (currPlayer = 'X');
+
     for (let i = 0; i < board.length; i++) {
       if (board[i] !== '') continue;
+
       board[i] = currPlayer;
       let score = minMax(board, depth + 1, false, currPlayer, beneficiar, alpha , betha);
       board[i] = '';
+
       if (score > bestScore) {
         bestScore = score;
-        // bestIdx = i;
       };
+
       // alpha - betha Pruning
       if (score > alpha) alpha = score;
       if (alpha >= betha) break;
 
     }
   } else {
+
     bestScore = 1000;
-    // bestIdx = -1;
+
     (currPlayer === 'X') ? (currPlayer = 'O') : (currPlayer = 'X');
+
     for (let i = 0; i < board.length; i++) {
       if (board[i] !== '') continue;
+
       board[i] = currPlayer;
       let score = minMax(board, depth + 1, true, currPlayer, beneficiar, alpha , betha);
       board[i] = '';
+
       if (score < bestScore) {
         bestScore = score;
-        // bestIdx = i;
       };
+
       // alpha - betha Pruning
       if (score < betha) betha = score;
       if (alpha >= betha) break;      
@@ -398,46 +390,18 @@ function minMax(board, depth, isMax, currPlayer, beneficiar, alpha , betha) { //
     }
   }
 
-  // if (depth === 0) return bestIdx;
   return bestScore
 };
 
-// function checkWinForCurrPlayer(board, player) {
-//   let win = false;
-//   for (let [a, b ,c] of winSequences) {
-//     if (board[a] == '') continue;
-//     if (board[a] !== player) continue;
-//     if(board[a] == board[b] && board[b] == board[c]) {
-//       win = true;
-//       break;
-//     }
-//   }
-//   return win
-// };
 
 function evaluateBoardForCurrPlayer(board, player) {
   for (let [a, b ,c] of winSequences) {
     if (board[a] === '') continue;
+
     if(board[a] === board[b] && board[b] === board[c]) {
       if (board[a] === player) return 10;
       return -10;
     }
+
   }
 };
-
-// let testBoard = [
-//   'O', '', 'X',
-//   'O', 'X', '',
-//   '', '', ''
-// ];
-// console.log(evaluateBoardForCurrPlayer(testBoard, 'X'))
-
-
-// let testBoard = [
-//   'O', '', 'X',
-//   '', 'X', '',
-//   '', '', ''
-// ];
-
-// let result = findBestMove(testBoard, 'O');
-// console.log(result, 'must = 6');
